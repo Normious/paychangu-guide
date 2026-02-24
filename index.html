@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechShop Malawi – PayChangu Demo</title>
+
+  <!--
+    ============================================================
+    WHY THIS FILE EXISTS
+    ============================================================
+    This is the "face" of our shop. It is what the customer sees
+    in their browser. Think of it like a physical shop window —
+    products are displayed here, and there is a "Buy" button.
+
+    When the customer clicks "Buy", JavaScript (script.js) takes
+    over and opens the PayChangu payment popup.
+    ============================================================
+  -->
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <header class="site-header">
+    <div class="logo">🛒 TechShop Malawi</div>
+    <span class="mode-badge" id="modeBadge">🧪 TEST MODE</span>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container">
+
+    <!-- PRODUCT CARD -->
+    <section class="product-card">
+      <div class="product-image">📱</div>
+      <div class="product-info">
+        <h1 class="product-name">Smartphone X Pro</h1>
+        <p class="product-description">
+          Latest flagship phone with 256GB storage, 48MP camera,
+          and 5000mAh battery. Available in Blantyre &amp; Lilongwe.
+        </p>
+
+        <!-- PRICE TAG -->
+        <div class="price-tag">
+          <span class="currency">MK</span>
+          <span class="amount" id="productAmount">150,000</span>
+        </div>
+
+        <!-- CUSTOMER DETAILS FORM
+             We collect name, email, and phone so PayChangu knows
+             who is paying. Think of it like filling in your name
+             on a bank deposit slip. -->
+        <div class="customer-form">
+          <h3>Your Details</h3>
+
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Chisomo" value="Chisomo" />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Phiri" value="Phiri" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="chisomo@email.com" value="chisomo@email.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number (Airtel/TNM)</label>
+            <input type="tel" id="phone" placeholder="+265999000000" value="+265999000000" />
+          </div>
+        </div>
+
+        <!-- PAY BUTTON
+             This is the big red button that starts everything.
+             When clicked, script.js generates a unique transaction
+             reference and opens PayChangu's payment popup. -->
+        <button class="btn-pay" id="payBtn" onclick="initiatePayment()">
+          💳 Pay MK 150,000 Now
+        </button>
+
+        <!-- LOADING STATE (hidden by default) -->
+        <div class="loading" id="loadingState" style="display:none;">
+          <div class="spinner"></div>
+          <p>Opening payment window…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PAYMENT RESULT SECTION =====
+         This area appears AFTER payment is attempted.
+         It shows success or failure message. Hidden by default. -->
+    <section class="payment-result" id="paymentResult" style="display:none;">
+      <div class="result-icon" id="resultIcon"></div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultMessage"></p>
+      <div class="result-details" id="resultDetails"></div>
+      <button class="btn-secondary" onclick="resetPage()">← Back to Shop</button>
+    </section>
+
+    <!-- ===== EXPLANATION BOX =====
+         This box helps students understand what is happening.
+         You would NOT include this in a real shop. -->
+    <aside class="explainer-box">
+      <h3>🎓 What is happening behind the scenes?</h3>
+      <ol>
+        <li><strong>You click "Pay"</strong> → JavaScript creates a unique order ID (tx_ref)</li>
+        <li><strong>PayChangu popup opens</strong> → Customer pays via Airtel Money, TNM Mpamba, or Card</li>
+        <li><strong>PayChangu notifies us</strong> → Our backend receives a webhook (silent background call)</li>
+        <li><strong>We verify</strong> → Backend confirms the payment is real using Secret Key</li>
+        <li><strong>Order confirmed</strong> → We show success message to customer</li>
+      </ol>
+      <p class="note">⚠️ In this demo, verification is simulated. In a real app, verification happens on your server.</p>
+    </aside>
+
+    <!-- TRANSACTION LOG (for teaching purposes) -->
+    <div class="tx-log" id="txLog">
+      <h3>📋 Transaction Log (Demo Only)</h3>
+      <div id="txLogContent">
+        <p class="log-placeholder">Logs will appear here when you click Pay…</p>
+      </div>
+    </div>
+
+    <!-- Container required by PayChangu popup.js -->
+  <div id="wrapper"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>PayChangu Integration Demo | Built for Teaching Purposes | Malawi 🇲🇼</p>
+    <p>Using PayChangu Sandbox (Test) Mode</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--
+    ============================================================
+    PAYCHANGU INLINE SCRIPT
+    ============================================================
+    This is the PayChangu JavaScript library. It is loaded from
+    PayChangu's server, just like how you load Google Maps.
+    It gives us the "PaychanguCheckout" function we use in script.js.
+
+    Think of it like plugging in a payment machine at a shop counter.
+    ============================================================
+  -->
+  <script src="https://in.paychangu.com/js/popup.js"></script>
+
+  <!-- Our own JavaScript file -->
+  <script src="script.js"></script>
+
+</body>
+</html>

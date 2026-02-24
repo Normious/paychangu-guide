@@ -1,0 +1,386 @@
+/*
+  ============================================================
+  style.css — TechShop Malawi PayChangu Demo
+  ============================================================
+  This file controls HOW the page looks.
+  Think of it like the interior design of a shop —
+  colors, fonts, spacing, and layout.
+
+  For beginners: CSS rules follow the pattern:
+    selector { property: value; }
+  ============================================================
+*/
+
+/* ===== GLOBAL RESET & BASE =====
+   Remove browser default spacing so everything looks consistent */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Root variables — change these to restyle the whole site */
+:root {
+  --primary:    #1a56db;   /* PayChangu-style blue */
+  --success:    #057a55;   /* Green for success */
+  --danger:     #e02424;   /* Red for errors */
+  --warning:    #ff6b00;   /* Orange for test mode badge */
+  --bg:         #f3f4f6;   /* Light grey background */
+  --card:       #ffffff;   /* White card background */
+  --text:       #111827;   /* Near-black text */
+  --muted:      #6b7280;   /* Grey secondary text */
+  --border:     #e5e7eb;   /* Light border */
+  --radius:     12px;      /* Rounded corners */
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: var(--primary);
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Test mode badge — shows student this is sandbox */
+.mode-badge {
+  background: var(--warning);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 0 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== PRODUCT CARD ===== */
+.product-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 28px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 540px) {
+  .product-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* Product emoji/image placeholder */
+.product-image {
+  font-size: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2ff;
+  border-radius: 10px;
+  min-height: 120px;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.product-description {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ===== PRICE TAG ===== */
+.price-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+}
+
+.currency {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* ===== CUSTOMER FORM ===== */
+.customer-form {
+  margin-bottom: 20px;
+}
+
+.customer-form h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+  background: #fff;
+}
+
+/* ===== PAY BUTTON ===== */
+.btn-pay {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(26,86,219,0.3);
+}
+
+.btn-pay:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+.btn-pay:active {
+  transform: translateY(0);
+}
+
+.btn-pay:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-secondary {
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 16px;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===== LOADING SPINNER ===== */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== PAYMENT RESULT ===== */
+.payment-result {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.result-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.payment-result h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.payment-result p {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.result-details {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: left;
+  font-size: 0.88rem;
+  line-height: 2;
+  margin: 16px 0;
+}
+
+.result-details strong {
+  color: var(--text);
+}
+
+/* Success/failure color theming */
+.result-success { color: var(--success); }
+.result-failure { color: var(--danger); }
+
+/* ===== EXPLAINER BOX ===== */
+.explainer-box {
+  background: #fffbeb;
+  border: 1.5px solid #fcd34d;
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.explainer-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #92400e;
+}
+
+.explainer-box ol {
+  padding-left: 20px;
+}
+
+.explainer-box li {
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  color: #78350f;
+}
+
+.explainer-box .note {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: #92400e;
+  font-style: italic;
+}
+
+/* ===== TRANSACTION LOG ===== */
+.tx-log {
+  background: #0f172a;
+  border-radius: var(--radius);
+  padding: 20px;
+  color: #94a3b8;
+}
+
+.tx-log h3 {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+.log-placeholder {
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.log-entry {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  padding: 4px 0;
+  border-bottom: 1px solid #1e293b;
+  word-break: break-all;
+}
+
+.log-entry.success { color: #4ade80; }
+.log-entry.error   { color: #f87171; }
+.log-entry.info    { color: #60a5fa; }
+.log-entry.warn    { color: #fbbf24; }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: #1f2937;
+  color: #9ca3af;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
